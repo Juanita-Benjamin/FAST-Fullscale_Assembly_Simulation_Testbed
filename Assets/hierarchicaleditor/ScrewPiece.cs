@@ -140,7 +140,8 @@ namespace PlayStructure
                         if (Player.instance.leftHand.currentAttachedObject == heldScrewdriver.gameObject)
                         {
                             Player.instance.leftHand.isLocked = true;
-                        }
+                        } 
+
                         if (Player.instance.rightHand.currentAttachedObject == heldScrewdriver.gameObject)
                         {
                             Player.instance.rightHand.isLocked = true;
