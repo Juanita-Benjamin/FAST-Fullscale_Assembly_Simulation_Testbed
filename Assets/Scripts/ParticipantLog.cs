@@ -25,9 +25,22 @@ public class ParticipantLog : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-      
+        //handles the within subjects design
+        if (trial_dropdown.value == 1)
+        {
+            embodiment.isOn = false;
+            Debug.Log("false");
+
+        }
+        else 
+        { 
+            embodiment.isOn = true;
+            Debug.Log("true");
+        }
+
     }
 
+    //handles the between subjects design
     public void PLog()
     {
         switch (cohort_dropdown.value)
@@ -37,17 +50,6 @@ public class ParticipantLog : MonoBehaviour
                 vhInstructor.isOn = false;
                 virtual_instructor.SetActive(false);
                 instructionSet.SetActive(true);
-                if (trial_dropdown.value == 1)
-                {
-                    embodiment.isOn = false;
-                }
-
-                else
-                {
-                    embodiment.isOn=true;
-                    //then spawn the avatar for the person
-                }
-
                 break;
 
             case 2:
@@ -55,34 +57,20 @@ public class ParticipantLog : MonoBehaviour
                 vhInstructor.isOn = false;
                 virtual_instructor.SetActive(true);
                 instructionSet.SetActive(false);
-                if (trial_dropdown.value == 1)
-                {
-                    embodiment.isOn = false;
-                }
-
-                else
-                {
-                    embodiment.isOn = true;
-                    //then spawn the avatar for the person
-                }
-
                 break;
             case 3:
                 isIntructor = true;
                 vhInstructor.isOn = true;
                 virtual_instructor.SetActive(true);
                 instructionSet.SetActive(true);
-                if (trial_dropdown.value == 1)
-                {
-                    embodiment.isOn = false;
-                }
-
-                else
-                {
-                    embodiment.isOn = true;
-                    //then spawn the avatar for the person
-                }
                 break;
         }
+    }
+
+
+    //this is to log in the spreadsheet what each person did
+    public void ParticipantData()
+    {
+        
     }
 }
