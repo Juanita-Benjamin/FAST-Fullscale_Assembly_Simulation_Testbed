@@ -25,6 +25,8 @@ public class ParticipantLog : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        PLog();
+
         //handles the within subjects design
         if (trial_dropdown.value == 1)
         {
@@ -54,7 +56,7 @@ public class ParticipantLog : MonoBehaviour
 
             case 2:
                 isIntructor = false;
-                vhInstructor.isOn = false;
+                vhInstructor.isOn = true;
                 virtual_instructor.SetActive(true);
                 instructionSet.SetActive(false);
                 break;
@@ -65,6 +67,8 @@ public class ParticipantLog : MonoBehaviour
                 instructionSet.SetActive(true);
                 break;
         }
+
+        
     }
 
 
