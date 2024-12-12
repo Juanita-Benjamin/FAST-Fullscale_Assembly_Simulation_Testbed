@@ -1,5 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Net.NetworkInformation;
+using System.IO;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
@@ -15,10 +18,12 @@ public class ParticipantLog : MonoBehaviour
     public GameObject virtual_instructor, instructionSet;
     public GameObject[] avatars;
 
+    readonly string log_path = "Participant_Logs.csv";
+
     // Start is called before the first frame update
     void Start()
     {
-      
+        ParticipantData();
 
     }
 
@@ -39,6 +44,8 @@ public class ParticipantLog : MonoBehaviour
             embodiment.isOn = true;
             Debug.Log("true");
         }
+
+
 
     }
 
@@ -75,6 +82,29 @@ public class ParticipantLog : MonoBehaviour
     //this is to log in the spreadsheet what each person did
     public void ParticipantData()
     {
-        
+        string dateTime = DateTime.Now.ToString("MM-dd-yy-HH-mm");
+        string ParticipantID = PID.GetComponent<TMP_InputField>().text;
+        bool embody = embodiment.GetComponent<bool>();
+        bool vh_instructor = vhInstructor.GetComponent<bool>();
+        string avatar_gender = gender_dropdown.options[gender_dropdown.value].text;
+        string avatar_race = race_dropdown.options[race_dropdown.value].text;
+        string trial = trial_dropdown.options[trial_dropdown.value].text;
+
+        if (!File.Exists(log_path))
+        {
+            using StreamWriter writer = File.CreateText(log_path);
+            writer.WriteLine("ParticipantID, Gender, Race, isEmbodied, VH_Instructor, Trial #");
+
+            writer.WriteLine($"{ParticipantID}, {avatar_gender}, {avatar_race}, {embody}, {trial}, {dateTime}");
+            writer.Close();
+        }
+
+        else 
+        { 
+            using StreamWriter writer = File.AppendText(log_path);
+            writer.WriteLine($"{ParticipantID}, {avatar_gender}, {avatar_race}, {embody}, {trial}, {dateTime}");
+            writer.Close();
+        }
+
     }
 }
