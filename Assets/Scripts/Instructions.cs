@@ -19,9 +19,7 @@ public class Instructions : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        LipSync.Play(lipSyncInstruction[0]); //plays the first instruction
-
-        clipIndex = 1;
+        
     }
 
     // Update is called once per frame
@@ -29,13 +27,21 @@ public class Instructions : MonoBehaviour
     {
         if (popSource.isPlaying) 
         {
-            PlayPopSound();
+            CheckForPopSound();
         }
 
     }
+    public void CallFirstInstructions()
+    {
+        //NOTE: Might want to wait a few seconds
+        LipSync.Play(lipSyncInstruction[0]); //plays the first instruction
+
+        clipIndex = 1;
+    }
+
 
     //check if something is playing
-    public void PlayPopSound()
+    public void CheckForPopSound()
     {
         //if there is nothing playing
         //if the bool is false then call Instructions
